@@ -49,7 +49,6 @@ public class User implements Serializable {
    @Column(name = "enabled", columnDefinition="BOOLEAN DEFAULT false")
    private boolean enabled;
 
-   @JsonIgnore
    @Column(name = "activated", columnDefinition="BOOLEAN DEFAULT false")
    private boolean activated;
 
@@ -72,7 +71,6 @@ public class User implements Serializable {
            name = "USER_AUTHORITY",
            joinColumns = { @JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
            inverseJoinColumns = {@JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "ID")})
-   @JsonIgnore
    private Set<Authority> authorities = new HashSet<>();
 
    public String getFullName() {
