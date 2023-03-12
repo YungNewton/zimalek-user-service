@@ -2,6 +2,7 @@ package com.zmarket.userservice.modules.security.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.zmarket.userservice.modules.security.enums.Gender;
+import com.zmarket.userservice.modules.wallet.model.Wallet;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -42,6 +43,9 @@ public class User implements Serializable {
    @Column(name = "phone")
    private String phone;
 
+   @OneToOne(fetch = FetchType.EAGER)
+   private Wallet wallet;
+
    @Column(name = "gender")
    @Enumerated(EnumType.STRING)
    private Gender gender;
@@ -49,7 +53,6 @@ public class User implements Serializable {
    @Column(name = "enabled", columnDefinition="BOOLEAN DEFAULT false")
    private boolean enabled;
 
-   @JsonIgnore
    @Column(name = "activated", columnDefinition="BOOLEAN DEFAULT false")
    private boolean activated;
 
@@ -72,7 +75,6 @@ public class User implements Serializable {
            name = "USER_AUTHORITY",
            joinColumns = { @JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
            inverseJoinColumns = {@JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "ID")})
-   @JsonIgnore
    private Set<Authority> authorities = new HashSet<>();
 
    public String getFullName() {

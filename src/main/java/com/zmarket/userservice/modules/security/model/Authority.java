@@ -1,5 +1,6 @@
 package com.zmarket.userservice.modules.security.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,6 +35,7 @@ public class Authority  {
    @Enumerated(EnumType.STRING)
    private AuthorityName name;
 
+   @JsonIgnore
    @ManyToMany(mappedBy = "authorities", fetch = FetchType.LAZY)
    private List<User> users;
 
